@@ -1,12 +1,16 @@
 package com.alecode.petisos_backend.controller;
 
+// IMPORTACIONES DE CLASES
 import com.alecode.petisos_backend.model.Tutor;
 import com.alecode.petisos_backend.repository.TutorRepository;
 
+// IMPORTACIONES DE ANOTACIONES
 import org.springframework.web.bind.annotation.*;
 
+// IMPORTACIONES DE CLASES DE JAVA
 import java.util.List;
 
+// ANOTACIONES DE LA CLASE
 @RestController
 @RequestMapping("/api/tutores")
 @CrossOrigin(origins = "*")

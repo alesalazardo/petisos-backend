@@ -1,13 +1,17 @@
 package com.alecode.petisos_backend.model;
 
+// IMPORTACION DE CLASES DE JAVA
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+// IMPORTACION DE CLASES PARA LA SERIALIZACION JSON
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+// ANOTACIONES DE LA CLASE
 @Entity
 @Table(name = "mascotas")
 public class Mascota {
+    // ANOTACIONES DE LOS ATRIBUTOS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,10 +39,10 @@ public class Mascota {
     @JsonIgnoreProperties("mascotas")
     private Tutor tutor;
 
-    // Constructor vacío y constructor con parámetros
+    // CONSTRUCTOR VACÍO
     public Mascota() {
     }
-
+    // CONSTRUCTOR CON PARÁMETROS
     public Mascota(String nombre, String especie, String raza, LocalDate fechaNacimiento, String color, String descripcion, Tutor tutor) {
         this.nombre = nombre;
         this.especie = especie;
@@ -49,7 +53,7 @@ public class Mascota {
         this.tutor = tutor;
     }
 
-    // Getters y setters
+    // GETTERS Y SETTERS
     public Long getId() {
         return id;
     }

@@ -1,5 +1,7 @@
+// PUNTO DE ENTRADA DE LA APLICACIÓN PETISOS-BACKEND
 package com.alecode.petisos_backend;
 
+// IMPORTACIONES DE CLASES DE SPRING BOOT
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
