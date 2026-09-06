@@ -50,4 +50,15 @@ public class MascotaController {
             })
             .orElse(ResponseEntity.notFound().build());
     }
+
+    @SuppressWarnings("null")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMascota(@PathVariable Long id) {
+        return mascotaRepository.findById(id)
+            .map(mascota -> {
+                mascotaRepository.delete(mascota);
+                return ResponseEntity.noContent().<Void>build();
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
 }

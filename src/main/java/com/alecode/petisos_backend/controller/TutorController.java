@@ -49,4 +49,15 @@ public class TutorController {
             })
             .orElse(ResponseEntity.notFound().build());
     } 
+
+    @SuppressWarnings ("null")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTutor(@PathVariable Long id) {
+        return tutorRepository.findById(id)
+            .map(tutor -> {
+                tutorRepository.delete(tutor);
+                return ResponseEntity.noContent().<Void>build();
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
 }

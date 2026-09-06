@@ -34,7 +34,7 @@ public class Mascota {
     @Column(nullable = false, length = 100)
     private String descripcion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tutor_id", nullable = false)
     @JsonIgnoreProperties("mascotas")
     private Tutor tutor;
