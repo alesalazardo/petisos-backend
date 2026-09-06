@@ -4,6 +4,7 @@ package com.alecode.petisos_backend.controller;
 import com.alecode.petisos_backend.model.Mascota;
 import com.alecode.petisos_backend.repository.MascotaRepository;
 
+import org.springframework.http.ResponseEntity;
 // IMPORTACION DE ANOTACIONES
 import org.springframework.web.bind.annotation.*;
 
@@ -30,5 +31,23 @@ public class MascotaController {
     @PostMapping
     public Mascota createMascota(@RequestBody Mascota mascota) {
         return mascotaRepository.save(mascota);
+    }
+
+    @SuppressWarnings("null")
+    @PutMapping("/{id}")
+    public ResponseEntity<Mascota> updateMascota(@PathVariable Long id, @RequestBody Mascota mascotaDetails) {
+        return mascotaRepository.findById(id)
+            .map(existentMascota -> {
+                existentMascota.setNombre(mascotaDetails.getNombre());
+                existentMascota.setEspecie(mascotaDetails.getEspecie());
+                existentMascota.setRaza(mascotaDetails.getRaza());
+                existentMascota.setFechaNacimiento(mascotaDetails.getFechaNacimiento());
+                existentMascota.setTutor(mascotaDetails.getTutor());
+                existentMascota.setColor(mascotaDetails.getColor());
+                existentMascota.setDescripcion(mascotaDetails.getDescripcion());
+                Mascota updatedMascota = mascotaRepository.save(existentMascota);
+                return ResponseEntity.ok(updatedMascota);
+            })
+            .orElse(ResponseEntity.notFound().build());
     }
 }
