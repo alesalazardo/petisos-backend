@@ -4,6 +4,7 @@ package com.alecode.petisos_backend.controller;
 import com.alecode.petisos_backend.model.Tutor;
 import com.alecode.petisos_backend.repository.TutorRepository;
 
+import org.springframework.http.ResponseEntity;
 // IMPORTACIONES DE ANOTACIONES
 import org.springframework.web.bind.annotation.*;
 
@@ -31,4 +32,19 @@ public class TutorController {
     public Tutor createTutor(@RequestBody Tutor tutor) {
         return tutorRepository.save(tutor);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Tutor> updateTutor(@PathVariable Long id, @RequestBody Tutor tutorDetails) {
+        return tutorRepository.findById(id)
+            .map(existentTutor -> {
+                existentTutor.setNombre(tutorDetails.getNombre());
+                existentTutor.setApellido(tutorDetails.getApellido());
+                existentTutor.setTelefono(tutorDetails.getTelefono());
+                existentTutor.setEmail(tutorDetails.getEmail());
+                existentTutor.setCiudad(tutorDetails.getCiudad());
+                Tutor updatedTutor = tutorRepository.save(existentTutor);
+                return ResponseEntity.ok(updatedTutor);
+            })
+            .orElse(ResponseEntity.notFound().build());
+    } 
 }
