@@ -2,6 +2,11 @@ package com.alecode.petisos_backend.model;
 
 // IMPORTACIONES DE CLASES DE JAVA
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +21,9 @@ public class Tutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El nombre no puede estar vacío")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre solo debe contener letras")
     @Column(nullable = false, length = 100)
     private String nombre;
 
@@ -25,6 +33,7 @@ public class Tutor {
     @Column(nullable = false, length = 100)
     private String apellido;
 
+    @Email(message = "Debe proporcionar una dirección de correo electrónico válida")
     @Column(nullable = false, length = 100)
     private String email;
 

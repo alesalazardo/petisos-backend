@@ -4,6 +4,8 @@ package com.alecode.petisos_backend.controller;
 import com.alecode.petisos_backend.model.Mascota;
 import com.alecode.petisos_backend.repository.MascotaRepository;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 // IMPORTACION DE ANOTACIONES
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ public class MascotaController {
 
     @SuppressWarnings("null")
     @PostMapping
-    public Mascota createMascota(@RequestBody Mascota mascota) {
+    public Mascota createMascota(@Valid @RequestBody Mascota mascota) {
         return mascotaRepository.save(mascota);
     }
 

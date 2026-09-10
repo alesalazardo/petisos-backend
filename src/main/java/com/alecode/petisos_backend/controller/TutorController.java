@@ -4,6 +4,9 @@ package com.alecode.petisos_backend.controller;
 import com.alecode.petisos_backend.model.Tutor;
 import com.alecode.petisos_backend.repository.TutorRepository;
 
+import jakarta.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 // IMPORTACION DE ANOTACIONES
@@ -17,7 +20,8 @@ import java.util.List;
 @RequestMapping("/api/tutores")
 @CrossOrigin(origins = "*")
 public class TutorController {
-    private final TutorRepository tutorRepository;
+    @Autowired 
+    private TutorRepository tutorRepository;
 
     public TutorController(TutorRepository tutorRepository) {
         this.tutorRepository = tutorRepository;
@@ -30,13 +34,13 @@ public class TutorController {
 
     @SuppressWarnings("null")
     @PostMapping
-    public Tutor createTutor(@RequestBody Tutor tutor) {
+    public Tutor createTutor(@Valid @RequestBody Tutor tutor) {
         return tutorRepository.save(tutor);
     }
 
     @SuppressWarnings("null")
     @PutMapping("/{id}")
-    public ResponseEntity<Tutor> updateTutor(@PathVariable Long id, @RequestBody Tutor tutorDetails) {
+    public ResponseEntity<Tutor> updateTutor(@PathVariable Long id, @Valid @RequestBody Tutor tutorDetails) {
         return tutorRepository.findById(id)
             .map(existentTutor -> {
                 existentTutor.setNombre(tutorDetails.getNombre());

@@ -2,6 +2,10 @@ package com.alecode.petisos_backend.model;
 
 // IMPORTACION DE CLASES DE JAVA
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Pattern;
+
 import java.time.LocalDate;
 
 // IMPORTACION DE CLASES PARA LA SERIALIZACION JSON
@@ -16,15 +20,19 @@ public class Mascota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank (message = "El nombre no puede estar vacío")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre solo debe contener letras")
     @Column(nullable = false, length = 100)
     private String nombre;
 
+    @NotBlank (message = "La especie no puede estar vacía")
     @Column(nullable = false, length = 30)
     private String especie;
     
     @Column(nullable = false, length = 30)
     private String raza;
 
+    @PastOrPresent(message = "La fecha de nacimiento no puede ser una fecha futura")
     @Column(name = "fecha_nacimiento")
     private LocalDate fechaNacimiento;
 
