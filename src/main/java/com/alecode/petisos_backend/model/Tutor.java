@@ -27,6 +27,9 @@ public class Tutor {
     @Column(nullable = false, length = 100)
     private String nombre;
 
+    @Column(nullable = false, length = 20)
+    private String rol;
+
     @Column(nullable = false, length = 100)
     private String telefono;
 
@@ -36,6 +39,9 @@ public class Tutor {
     @Email(message = "Debe proporcionar una dirección de correo electrónico válida")
     @Column(nullable = false, length = 100)
     private String email;
+
+    @Column (nullable = false, length = 255)
+    private String password;
 
     @Column(nullable = false, length = 100)
     private String ciudad;
@@ -49,11 +55,13 @@ public class Tutor {
     }
 
     // CONSTRUCTOR CON PARÁMETROS
-    public Tutor(String nombre, String apellido, String telefono, String email, String ciudad) {
+    public Tutor(String nombre, String rol, String apellido, String telefono, String email, String password,String ciudad) {
         this.nombre = nombre;
+        this.rol = rol;
         this.apellido = apellido;
         this.telefono = telefono;
         this.email = email;
+        this.password = password;
         this.ciudad = ciudad;
     }
 
@@ -64,6 +72,14 @@ public class Tutor {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public void setNombre(String nombre) {
@@ -92,6 +108,14 @@ public class Tutor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCiudad() {

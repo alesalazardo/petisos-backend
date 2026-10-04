@@ -44,6 +44,7 @@ public class TutorController {
         return tutorRepository.findById(id)
             .map(existentTutor -> {
                 existentTutor.setNombre(tutorDetails.getNombre());
+                existentTutor.setRol(tutorDetails.getRol());
                 existentTutor.setApellido(tutorDetails.getApellido());
                 existentTutor.setTelefono(tutorDetails.getTelefono());
                 existentTutor.setEmail(tutorDetails.getEmail());
